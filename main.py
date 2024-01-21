@@ -14,7 +14,7 @@ admin = {
 }
 
 cards= {
-    "12341234": 0000,
+    "12341234": 1000,
     "43214321": 1111,
     "22222222": 2222 
 }
@@ -35,5 +35,25 @@ credits = {
     "consumer": 650_000,
     "auto": 1_800_000
 }
+
+
+def card_password():
+    user_number_card = (input("Введите номер карты: "))
+    # user_password_card = int(input("Введите пароль: "))
+    count = 3
+    if user_number_card in cards.keys():
+        user_pin_card = cards[user_number_card]
+        while count > 0:
+            user_password_card = int(input("Введите пароль: "))
+            count -= 1
+            if user_password_card == user_pin_card:
+                return "Выберите операцию"
+            else: 
+                print(f"Пин-код не верный, осталось {count} попытка(и)")
+        else:
+            return "Карта заблокирована, обратитесь в отделение банка"        
+    else:
+        cards[user_number_card] = input("Введите пароль: ")
+        return "Выберите операцию"   
 
 
