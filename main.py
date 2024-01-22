@@ -62,34 +62,31 @@ def card_password():
 
 
 def add_card():
-    user_number_card = input("Введите номер карты: ")
-    print("Пароль не должен начинаться с цифры ноль")
-    print("Пароль должен быть равен 4 цифры")
+    user_number_card = input("Введите 8-ми значный номер карты: ")
+    len_number_card = len(user_number_card)
+    if len_number_card == 8:
+        cards[user_number_card] = None
+    else:
+        while len_number_card != 8:
+            print("Некорректный номер карты")
+            user_number_card = input("Введите 8-ми значный номер карты: ")
+            len_number_card = len(user_number_card)
+        cards[user_number_card] = None    
+        print("Пароль не должен начинаться с цифры ноль")
+        print("Пароль должен быть равен 4 цифры")
     user_pin_card = input("Введите пароль: ")
     first_digit = int(user_pin_card) // 1000
-    if len(user_pin_card) == 4:
-        if first_digit != 0:
-            cards[user_number_card] = user_pin_card
-            return cards
-        else:
-            while len(str(user_pin_card)) != 4 or first_digit == 0:
-                print("Пароль не должен начинаться с цифры ноль")
-                print("Пароль должен быть равен 4 цифры")
-                user_pin_card = input("Введите пароль: ")
-                first_digit = int(user_pin_card) // 1000
+    if len(user_pin_card) == 4 and first_digit != 0:
             cards[user_number_card] = int(user_pin_card)
             return cards
     else:
-        print("Пароль не корректен")
         while len(str(user_pin_card)) != 4 or first_digit == 0:
-            print("Пароль должен быть равен 4 цифрам и не начинаться с нуля")
+            print("Пароль не должен начинаться с цифры ноль")
+            print("Пароль должен быть равен 4 цифры")
             user_pin_card = input("Введите пароль: ")
             first_digit = int(user_pin_card) // 1000
-        cards[user_number_card] = user_pin_card
+        cards[user_number_card] = int(user_pin_card)
         return cards
     
-
-
-print(add_card())
 
 
